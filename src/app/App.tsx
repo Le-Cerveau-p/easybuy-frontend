@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider } from "./components/theme-provider";
 import { TopNavigation } from "./components/top-navigation";
 import { BottomNavigation } from "./components/bottom-navigation";
@@ -146,6 +146,11 @@ const AdminReportsPage = lazy(() =>
     default: module.AdminReportsPage,
   })),
 );
+const NotFoundPage = lazy(() =>
+  import("./pages/not-found").then((module) => ({
+    default: module.NotFoundPage,
+  })),
+);
 
 function RouteLoader() {
   return (
@@ -189,7 +194,7 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <ThemeProvider>
-      <HashRouter>
+      <BrowserRouter>
         <Layout>
           <Suspense fallback={<RouteLoader />}>
             <Routes>
@@ -234,10 +239,11 @@ export default function App() {
               <Route path="/admin/notifications" element={<AdminLayout><AdminNotificationsPage /></AdminLayout>} />
               <Route path="/admin/settings" element={<AdminLayout><AdminSettingsPage /></AdminLayout>} />
               <Route path="/admin/reports" element={<AdminLayout><AdminReportsPage /></AdminLayout>} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>
         </Layout>
-      </HashRouter>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
