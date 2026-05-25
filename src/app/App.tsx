@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider } from "./components/theme-provider";
 import { TopNavigation } from "./components/top-navigation";
@@ -172,10 +172,20 @@ function Layout({ children }: { children: React.ReactNode }) {
   const adminPages = location.pathname.startsWith("/admin");
   const isAuthPage = authPages.includes(location.pathname);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    const scrollContainers = document.querySelectorAll<HTMLElement>("[data-app-scroll]");
+    scrollContainers.forEach((container) => {
+      container.scrollTop = 0;
+      container.scrollLeft = 0;
+    });
+  }, [location.pathname, location.search, location.hash]);
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {!isAuthPage && !adminPages && <TopNavigation />}
-      <main className="flex-1 min-w-0 overflow-x-hidden">{children}</main>
+      <main data-app-scroll className="flex-1 min-w-0 overflow-x-hidden">{children}</main>
       {!isAuthPage && !adminPages && <Footer />}
       {!isAuthPage && !adminPages && <BottomNavigation />}
     </div>
@@ -186,7 +196,7 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background flex">
       <AdminSidebar />
-      <main className="flex-1 overflow-auto">{children}</main>
+      <main data-app-scroll className="flex-1 overflow-auto">{children}</main>
     </div>
   );
 }
