@@ -94,7 +94,7 @@ export function OrderTrackingPage() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 lg:pb-8">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 pb-28 sm:pb-24 lg:pb-8">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
@@ -102,14 +102,14 @@ export function OrderTrackingPage() {
           <span>/</span>
           <span className="text-foreground">Order #{order.id}</span>
         </div>
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1 className="text-3xl font-bold mb-2">Track Your Order</h1>
             <p className="text-muted-foreground">
               Estimated delivery: <span className="font-semibold text-foreground">{order.estimatedDelivery}</span>
             </p>
           </div>
-          <div className="px-4 py-2 bg-primary/10 border border-primary rounded-xl">
+          <div className="w-full rounded-xl border border-primary bg-primary/10 px-4 py-2 sm:w-auto">
             <div className="text-xs text-muted-foreground">Tracking Number</div>
             <div className="font-semibold text-primary">{order.trackingNumber}</div>
           </div>
@@ -121,16 +121,16 @@ export function OrderTrackingPage() {
         <h2 className="text-xl font-bold mb-8">Order Status</h2>
         <div className="relative">
           {timeline.map((item, index) => (
-            <div key={item.status} className="relative flex gap-6 pb-8 last:pb-0">
+            <div key={item.status} className="relative flex flex-col gap-4 pb-8 last:pb-0 sm:flex-row sm:gap-6">
               {/* Connector Line */}
               {index < timeline.length - 1 && (
-                <div className={`absolute left-4 top-12 w-0.5 h-full ${
+                <div className={`absolute left-8 top-12 hidden w-0.5 h-full sm:block ${
                   item.completed ? "bg-success" : "bg-border"
                 }`} />
               )}
 
               {/* Icon */}
-              <div className={`relative z-10 flex-shrink-0 h-16 w-16 rounded-full flex items-center justify-center ${
+              <div className={`relative z-10 flex-shrink-0 flex h-14 w-14 items-center justify-center rounded-full sm:h-16 sm:w-16 ${
                 item.completed
                   ? "bg-success/10"
                   : item.current
@@ -141,20 +141,20 @@ export function OrderTrackingPage() {
               </div>
 
               {/* Content */}
-              <div className="flex-1 pt-2">
-                <div className="flex items-start justify-between gap-4 mb-1">
+              <div className="flex-1 pt-0 sm:pt-2">
+                <div className="mb-1 flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
                   <h3 className={`font-semibold text-lg ${
                     item.current ? "text-primary" : item.completed ? "text-foreground" : "text-muted-foreground"
                   }`}>
                     {item.label}
                   </h3>
                   {item.date && (
-                    <span className="text-sm text-muted-foreground whitespace-nowrap">
+                    <span className="text-sm text-muted-foreground sm:whitespace-nowrap">
                       {item.date}
                     </span>
                   )}
                 </div>
-                <p className="text-muted-foreground">{item.description}</p>
+                <p className="break-words text-muted-foreground">{item.description}</p>
                 {item.current && (
                   <div className="mt-3 p-3 bg-primary/5 border border-primary/20 rounded-xl">
                     <div className="flex items-center gap-2 text-sm text-primary">
@@ -169,18 +169,18 @@ export function OrderTrackingPage() {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6 mb-8">
+      <div className="mb-8 grid gap-6 md:grid-cols-2">
         {/* Order Items */}
         <div className="bg-card border border-border rounded-2xl p-6">
           <h2 className="text-xl font-bold mb-4">Order Items</h2>
           <div className="space-y-4">
             {order.items.map((item) => (
               <div key={item.id} className="flex gap-4">
-                <div className="h-20 w-20 rounded-xl overflow-hidden bg-muted flex-shrink-0">
+                <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-muted">
                   <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-semibold line-clamp-2">{item.name}</h3>
+                  <h3 className="break-words font-semibold line-clamp-2">{item.name}</h3>
                   <div className="flex items-center justify-between mt-2">
                     <span className="text-sm text-muted-foreground">Qty: {item.quantity}</span>
                     <span className="font-semibold text-primary">${item.price * item.quantity}</span>
@@ -203,7 +203,7 @@ export function OrderTrackingPage() {
               <MapPin className="h-5 w-5 text-primary mt-0.5" />
               <div>
                 <div className="font-semibold mb-1">Shipping Address</div>
-                <div className="text-sm text-muted-foreground">
+                <div className="break-words text-sm text-muted-foreground">
                   {order.shippingAddress.name}<br />
                   {order.shippingAddress.address}<br />
                   {order.shippingAddress.city}, {order.shippingAddress.state}
@@ -214,14 +214,14 @@ export function OrderTrackingPage() {
               <Phone className="h-5 w-5 text-primary mt-0.5" />
               <div>
                 <div className="font-semibold mb-1">Contact Number</div>
-                <div className="text-sm text-muted-foreground">{order.shippingAddress.phone}</div>
+                <div className="break-words text-sm text-muted-foreground">{order.shippingAddress.phone}</div>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <Mail className="h-5 w-5 text-primary mt-0.5" />
               <div>
                 <div className="font-semibold mb-1">Email</div>
-                <div className="text-sm text-muted-foreground">{order.shippingAddress.email}</div>
+                <div className="break-words text-sm text-muted-foreground">{order.shippingAddress.email}</div>
               </div>
             </div>
             <div className="flex items-start gap-3">
@@ -236,19 +236,19 @@ export function OrderTrackingPage() {
       </div>
 
       {/* Actions */}
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col gap-4 sm:flex-row">
         <Link
           to="/profile/orders"
-          className="flex-1 text-center py-3 px-6 border border-border rounded-xl font-semibold hover:bg-muted transition-all"
+          className="flex-1 rounded-xl border border-border px-6 py-3 text-center font-semibold transition-all hover:bg-muted"
         >
           View All Orders
         </Link>
-        <button className="flex-1 py-3 px-6 bg-destructive/10 text-destructive border border-destructive/20 rounded-xl font-semibold hover:bg-destructive/20 transition-all">
+        <button className="flex-1 rounded-xl border border-destructive/20 bg-destructive/10 px-6 py-3 font-semibold text-destructive transition-all hover:bg-destructive/20">
           Cancel Order
         </button>
         <Link
           to="/"
-          className="flex-1 text-center py-3 px-6 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all"
+          className="flex-1 rounded-xl bg-primary px-6 py-3 text-center font-semibold text-primary-foreground transition-all hover:bg-primary/90"
         >
           Continue Shopping
         </Link>

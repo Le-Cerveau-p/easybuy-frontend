@@ -149,9 +149,9 @@ export function ProductListingPage() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 lg:pb-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 pb-28 sm:pb-24 lg:pb-8">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h1 className="text-3xl font-bold mb-2">Products</h1>
           <p className="text-muted-foreground">{products.length} items found</p>
@@ -159,18 +159,18 @@ export function ProductListingPage() {
       </div>
 
       {/* Toolbar */}
-      <div className="flex items-center justify-between gap-4 mb-6 flex-wrap">
+      <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         {/* Filters Button (Mobile) */}
         <button
           onClick={() => setShowFilters(!showFilters)}
-          className="lg:hidden flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-xl hover:bg-muted transition-colors"
+          className="lg:hidden flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-card px-4 py-2 transition-colors hover:bg-muted sm:w-auto"
         >
           <SlidersHorizontal className="h-5 w-5" />
           <span>Filters</span>
         </button>
 
         {/* View Toggle */}
-        <div className="flex items-center gap-2 bg-card border border-border rounded-xl p-1">
+        <div className="flex items-center gap-2 self-start rounded-xl border border-border bg-card p-1">
           <button
             onClick={() => setViewMode("grid")}
             className={`p-2 rounded-lg transition-colors ${
@@ -190,12 +190,12 @@ export function ProductListingPage() {
         </div>
 
         {/* Sort By */}
-        <div className="flex items-center gap-2">
+        <div className="flex w-full items-center gap-2 sm:w-auto">
           <span className="text-sm text-muted-foreground hidden sm:block">Sort by:</span>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="px-4 py-2 bg-card border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-ring"
+            className="w-full rounded-xl border border-border bg-card px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ring sm:w-auto"
           >
             <option value="featured">Featured</option>
             <option value="price-low">Price: Low to High</option>
@@ -243,7 +243,7 @@ export function ProductListingPage() {
           <div
             className={
               viewMode === "grid"
-                ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+              ? "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
                 : "space-y-4"
             }
           >
@@ -285,7 +285,7 @@ function ProductCard({ product }: { product: any }) {
   return (
     <Link
       to={`/product/${product.id}`}
-      className="group bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]"
+      className="group rounded-2xl bg-card overflow-hidden shadow-sm transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
     >
       <div className="relative aspect-square overflow-hidden bg-muted">
         <img
@@ -305,7 +305,7 @@ function ProductCard({ product }: { product: any }) {
         </button>
       </div>
       <div className="p-4">
-        <h3 className="font-semibold text-base mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+        <h3 className="mb-2 line-clamp-2 break-words font-semibold text-base transition-colors group-hover:text-primary">
           {product.name}
         </h3>
         <div className="flex items-center gap-1 mb-2">
@@ -314,7 +314,7 @@ function ProductCard({ product }: { product: any }) {
           <span className="text-muted-foreground text-sm">({product.reviews})</span>
         </div>
         <div className="flex items-baseline gap-2">
-          <span className="text-xl font-bold text-primary">${product.price}</span>
+          <span className="text-lg font-bold text-primary sm:text-xl">${product.price}</span>
           <span className="text-sm text-muted-foreground line-through">
             ${product.originalPrice}
           </span>
@@ -333,9 +333,9 @@ function ProductListItem({ product }: { product: any }) {
   return (
     <Link
       to={`/product/${product.id}`}
-      className="group bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex gap-4 p-4"
+      className="group flex flex-col gap-4 rounded-2xl bg-card p-4 overflow-hidden shadow-sm transition-all duration-300 hover:shadow-xl sm:flex-row"
     >
-      <div className="relative w-32 h-32 flex-shrink-0 overflow-hidden rounded-xl bg-muted">
+      <div className="relative aspect-square w-full flex-shrink-0 overflow-hidden rounded-xl bg-muted sm:h-32 sm:w-32">
         <img
           src={product.image}
           alt={product.name}
@@ -344,7 +344,7 @@ function ProductListItem({ product }: { product: any }) {
       </div>
       <div className="flex-1 flex flex-col justify-between">
         <div>
-          <h3 className="font-semibold text-lg mb-1 group-hover:text-primary transition-colors">
+          <h3 className="mb-1 break-words font-semibold text-lg transition-colors group-hover:text-primary">
             {product.name}
           </h3>
           <div className="flex items-center gap-1 mb-2">
@@ -352,18 +352,18 @@ function ProductListItem({ product }: { product: any }) {
             <span className="font-semibold text-sm">{product.rating}</span>
             <span className="text-muted-foreground text-sm">({product.reviews})</span>
           </div>
-          <p className="text-sm text-muted-foreground">
+          <p className="break-words text-sm text-muted-foreground">
             Brand: {product.brand} | Category: {product.category}
           </p>
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-primary">${product.price}</span>
+            <span className="text-xl font-bold text-primary sm:text-2xl">${product.price}</span>
             <span className="text-sm text-muted-foreground line-through">
               ${product.originalPrice}
             </span>
           </div>
-          <button className="px-6 py-2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl font-semibold transition-all">
+          <button className="w-full rounded-xl bg-primary px-6 py-2 font-semibold text-primary-foreground transition-all hover:bg-primary/90 sm:w-auto">
             View Details
           </button>
         </div>

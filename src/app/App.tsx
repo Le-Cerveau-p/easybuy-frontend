@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider } from "./components/theme-provider";
 import { TopNavigation } from "./components/top-navigation";
 import { BottomNavigation } from "./components/bottom-navigation";
@@ -170,7 +170,7 @@ function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {!isAuthPage && !adminPages && <TopNavigation />}
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 min-w-0 overflow-x-hidden">{children}</main>
       {!isAuthPage && !adminPages && <Footer />}
       {!isAuthPage && !adminPages && <BottomNavigation />}
     </div>
@@ -189,7 +189,7 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <ThemeProvider>
-      <BrowserRouter>
+      <HashRouter>
         <Layout>
           <Suspense fallback={<RouteLoader />}>
             <Routes>
@@ -237,7 +237,7 @@ export default function App() {
             </Routes>
           </Suspense>
         </Layout>
-      </BrowserRouter>
+      </HashRouter>
     </ThemeProvider>
   );
 }

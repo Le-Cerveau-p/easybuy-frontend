@@ -142,9 +142,9 @@ export function PropertyDetailsPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 lg:pb-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 pb-28 sm:pb-24 lg:pb-8">
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
+      <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
         <Link to="/" className="hover:text-foreground">Home</Link>
         <span>/</span>
         <Link to="/properties" className="hover:text-foreground">Properties & Vehicles</Link>
@@ -172,7 +172,7 @@ export function PropertyDetailsPage() {
               </button>
             </div>
           </div>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-4 gap-2 sm:gap-4">
             {property.images.map((image: string, index: number) => (
               <button key={index} onClick={() => setSelectedImage(index)} className={`aspect-video rounded-xl overflow-hidden border-2 transition-all ${selectedImage === index ? "border-primary" : "border-transparent"}`}>
                 <img src={image} alt={`View ${index + 1}`} className="w-full h-full object-cover" />
@@ -184,36 +184,36 @@ export function PropertyDetailsPage() {
         {/* Property Info */}
         <div className="space-y-6">
           <div>
-            <div className="flex items-center gap-2 mb-2">
+            <div className="mb-2 flex flex-wrap items-center gap-2">
               <span className="px-3 py-1 bg-primary/10 text-primary rounded-lg font-semibold text-sm capitalize">{property.type}</span>
               {property.seller.verified && <span className="px-3 py-1 bg-success/10 text-success rounded-lg font-semibold text-sm">Verified Seller</span>}
             </div>
-            <h1 className="text-3xl font-bold mb-3">{property.name}</h1>
-            <div className="flex items-center gap-2 text-muted-foreground mb-4">
+            <h1 className="mb-3 text-2xl font-bold sm:text-3xl">{property.name}</h1>
+            <div className="mb-4 flex flex-wrap items-center gap-2 text-muted-foreground">
               <MapPin className="h-5 w-5" />
               <span>{property.location}</span>
             </div>
-            <div className="text-4xl font-bold text-primary mb-2">${property.price.toLocaleString()}{property.priceUnit || ""}</div>
+            <div className="mb-2 text-3xl font-bold text-primary sm:text-4xl">${property.price.toLocaleString()}{property.priceUnit || ""}</div>
             <p className="text-sm text-muted-foreground">Negotiable</p>
           </div>
 
           {/* Key Specs */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {property.type === "car" && (
               <>
-                <div className="flex items-center gap-3 p-4 bg-muted rounded-xl">
+                <div className="flex items-center gap-3 rounded-xl bg-muted p-4">
                   <Calendar className="h-6 w-6 text-primary" />
                   <div><div className="text-sm text-muted-foreground">Year</div><div className="font-semibold">{property.specs.year}</div></div>
                 </div>
-                <div className="flex items-center gap-3 p-4 bg-muted rounded-xl">
+                <div className="flex items-center gap-3 rounded-xl bg-muted p-4">
                   <Gauge className="h-6 w-6 text-primary" />
                   <div><div className="text-sm text-muted-foreground">Mileage</div><div className="font-semibold">{property.specs.mileage}</div></div>
                 </div>
-                <div className="flex items-center gap-3 p-4 bg-muted rounded-xl">
+                <div className="flex items-center gap-3 rounded-xl bg-muted p-4">
                   <Fuel className="h-6 w-6 text-primary" />
                   <div><div className="text-sm text-muted-foreground">Fuel</div><div className="font-semibold">{property.specs.fuelType}</div></div>
                 </div>
-                <div className="flex items-center gap-3 p-4 bg-muted rounded-xl">
+                <div className="flex items-center gap-3 rounded-xl bg-muted p-4">
                   <Users className="h-6 w-6 text-primary" />
                   <div><div className="text-sm text-muted-foreground">Owners</div><div className="font-semibold">{property.specs.owners}</div></div>
                 </div>
@@ -221,11 +221,11 @@ export function PropertyDetailsPage() {
             )}
             {property.type === "apartment" && (
               <>
-                <div className="flex items-center gap-3 p-4 bg-muted rounded-xl">
+                <div className="flex items-center gap-3 rounded-xl bg-muted p-4">
                   <Bed className="h-6 w-6 text-primary" />
                   <div><div className="text-sm text-muted-foreground">Bedrooms</div><div className="font-semibold">{property.specs.bedrooms}</div></div>
                 </div>
-                <div className="flex items-center gap-3 p-4 bg-muted rounded-xl">
+                <div className="flex items-center gap-3 rounded-xl bg-muted p-4">
                   <Bath className="h-6 w-6 text-primary" />
                   <div><div className="text-sm text-muted-foreground">Bathrooms</div><div className="font-semibold">{property.specs.bathrooms}</div></div>
                 </div>
@@ -236,7 +236,7 @@ export function PropertyDetailsPage() {
               </>
             )}
             {property.type === "land" && (
-              <div className="flex items-center gap-3 p-4 bg-muted rounded-xl col-span-2">
+              <div className="flex items-center gap-3 rounded-xl bg-muted p-4 sm:col-span-2">
                 <Square className="h-6 w-6 text-primary" />
                 <div><div className="text-sm text-muted-foreground">Size</div><div className="font-semibold">{property.specs.size}</div></div>
               </div>
@@ -244,7 +244,7 @@ export function PropertyDetailsPage() {
           </div>
 
           {/* Contact Actions */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid gap-4 sm:grid-cols-2">
             <button className="flex items-center justify-center gap-2 py-3 px-6 border-2 border-primary text-primary rounded-xl font-semibold hover:bg-primary/5 transition-all">
               <Phone className="h-5 w-5" />Call Seller
             </button>
@@ -253,7 +253,7 @@ export function PropertyDetailsPage() {
             </button>
           </div>
 
-          <button className="w-full py-3 border border-border rounded-xl font-semibold hover:bg-muted transition-all">Schedule Inspection</button>
+          <button className="w-full rounded-xl border border-border py-3 font-semibold transition-all hover:bg-muted">Schedule Inspection</button>
 
           {/* Seller Info */}
           <div className="p-4 bg-muted rounded-xl">
@@ -270,27 +270,27 @@ export function PropertyDetailsPage() {
 
       {/* Details Tabs */}
       <div className="mb-12">
-        <div className="prose prose-lg max-w-none mb-8"><p className="text-muted-foreground">{property.description}</p></div>
+        <div className="prose prose-lg max-w-none mb-8"><p className="break-words text-muted-foreground">{property.description}</p></div>
 
         {/* Specifications */}
-        <div className="bg-card border border-border rounded-2xl p-6 mb-8">
+        <div className="mb-8 rounded-2xl border border-border bg-card p-6">
           <h3 className="font-bold text-xl mb-4">Specifications</h3>
           <div className="grid md:grid-cols-2 gap-4">
             {Object.entries(property.specs).map(([key, value]) => (
-              <div key={key} className="flex items-center justify-between p-3 bg-muted rounded-xl">
+              <div key={key} className="flex items-center justify-between gap-3 rounded-xl bg-muted p-3">
                 <span className="text-muted-foreground capitalize">{key.replace(/([A-Z])/g, ' $1')}</span>
-                <span className="font-semibold">{value as string}</span>
+                <span className="min-w-0 break-words font-semibold text-right">{value as string}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Features */}
-        <div className="bg-card border border-border rounded-2xl p-6">
+        <div className="rounded-2xl border border-border bg-card p-6">
           <h3 className="font-bold text-xl mb-4">Features & Equipment</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
             {property.features.map((feature: string, index: number) => (
-              <div key={index} className="flex items-center gap-2 p-3 bg-muted rounded-xl">
+              <div key={index} className="flex items-center gap-2 rounded-xl bg-muted p-3">
                 <span className="h-2 w-2 bg-primary rounded-full"></span><span className="text-sm">{feature}</span>
               </div>
             ))}
@@ -303,16 +303,16 @@ export function PropertyDetailsPage() {
         <h2 className="text-2xl font-bold mb-6">Similar Listings</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {similarProperties.map((item) => (
-            <Link key={item.id} to={`/property/${item.id}`} className="group bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all">
+            <Link key={item.id} to={`/property/${item.id}`} className="group overflow-hidden rounded-2xl bg-card shadow-sm transition-all hover:shadow-xl">
               <div className="aspect-video overflow-hidden bg-muted">
                 <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
               </div>
               <div className="p-4">
-                <h3 className="font-semibold mb-2 line-clamp-1">{item.name}</h3>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                <h3 className="mb-2 break-words font-semibold line-clamp-1">{item.name}</h3>
+                <div className="mb-2 flex items-center gap-2 text-sm text-muted-foreground">
                   <MapPin className="h-4 w-4" /><span>{item.location}</span>
                 </div>
-                <span className="text-xl font-bold text-primary">${item.price.toLocaleString()}</span>
+                <span className="text-lg font-bold text-primary sm:text-xl">${item.price.toLocaleString()}</span>
               </div>
             </Link>
           ))}

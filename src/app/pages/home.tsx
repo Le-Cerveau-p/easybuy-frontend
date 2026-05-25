@@ -160,9 +160,9 @@ export function HomePage() {
   }, []);
 
   return (
-    <div className="pb-24 lg:pb-8">
+    <div className="pb-28 sm:pb-24 lg:pb-8">
       {/* Hero Carousel */}
-      <section className="relative h-[400px] md:h-[500px] overflow-hidden rounded-b-3xl">
+      <section className="relative h-[360px] sm:h-[400px] md:h-[500px] overflow-hidden rounded-b-3xl">
         {heroSlides.map((slide, index) => (
           <div
             key={index}
@@ -176,10 +176,14 @@ export function HomePage() {
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 text-white">
-              <h1 className="text-3xl md:text-5xl font-bold mb-3">{slide.title}</h1>
-              <p className="text-lg md:text-xl mb-6 text-white/90">{slide.subtitle}</p>
-              <button className="px-8 py-3 bg-primary hover:bg-primary/90 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-xl">
+            <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8 md:p-12 text-white">
+              <h1 className="mb-3 max-w-2xl text-2xl font-bold leading-tight sm:text-3xl md:text-5xl">
+                {slide.title}
+              </h1>
+              <p className="mb-5 max-w-xl text-sm text-white/90 sm:mb-6 sm:text-lg md:text-xl">
+                {slide.subtitle}
+              </p>
+              <button className="rounded-xl bg-primary px-5 py-2.5 font-semibold shadow-xl transition-all transform hover:scale-105 hover:bg-primary/90 sm:px-8 sm:py-3">
                 {slide.cta}
               </button>
             </div>
@@ -202,20 +206,20 @@ export function HomePage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 mt-12">
         {/* Categories */}
         <section>
-          <div className="flex items-center justify-between mb-6">
+          <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="text-2xl font-bold">Shop by Category</h2>
             <Link to="/categories" className="text-primary hover:text-primary/80 font-semibold">
               View All
             </Link>
           </div>
-          <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4 md:grid-cols-8">
             {categories.map((category) => (
               <Link
                 key={category.name}
                 to={`/category/${category.name.toLowerCase()}`}
-                className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-card hover:bg-muted transition-all transform hover:scale-105 cursor-pointer shadow-sm hover:shadow-md"
+                className="flex flex-col items-center gap-2 rounded-2xl bg-card p-3 text-center shadow-sm transition-all hover:scale-105 hover:bg-muted hover:shadow-md sm:p-4"
               >
-                <div className={`text-4xl h-16 w-16 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center shadow-lg`}>
+                <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br text-2xl shadow-lg sm:h-16 sm:w-16 sm:text-4xl ${category.color}`}>
                   {category.icon}
                 </div>
                 <span className="text-xs font-semibold text-center">{category.name}</span>
@@ -227,7 +231,7 @@ export function HomePage() {
 
         {/* Flash Sales */}
         <section>
-          <div className="flex items-center justify-between mb-6">
+          <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-3">
               <div className="h-12 w-12 rounded-xl bg-destructive/10 flex items-center justify-center">
                 <Flame className="h-6 w-6 text-destructive" />
@@ -250,7 +254,7 @@ export function HomePage() {
 
         {/* Trending Products */}
         <section>
-          <div className="flex items-center justify-between mb-6">
+          <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-3">
               <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
                 <TrendingUp className="h-6 w-6 text-primary" />
@@ -270,7 +274,7 @@ export function HomePage() {
 
         {/* Property & Vehicle Listings */}
         <section>
-          <div className="flex items-center justify-between mb-6">
+          <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="text-2xl font-bold">Featured Properties & Vehicles</h2>
             <Link to="/properties" className="text-primary hover:text-primary/80 font-semibold">
               View All
@@ -291,7 +295,7 @@ function ProductCard({ product, showCountdown }: { product: any; showCountdown?:
   return (
     <Link
       to={`/product/${product.id}`}
-      className="group bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]"
+      className="group rounded-2xl bg-card overflow-hidden shadow-sm transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
     >
       <div className="relative aspect-square overflow-hidden bg-muted">
         <img
@@ -315,7 +319,7 @@ function ProductCard({ product, showCountdown }: { product: any; showCountdown?:
         </button>
       </div>
       <div className="p-4">
-        <h3 className="font-semibold text-base mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+        <h3 className="mb-2 line-clamp-2 break-words font-semibold text-base transition-colors group-hover:text-primary">
           {product.name}
         </h3>
         <div className="flex items-center gap-1 mb-2">
@@ -324,7 +328,7 @@ function ProductCard({ product, showCountdown }: { product: any; showCountdown?:
           <span className="text-muted-foreground text-sm">({product.reviews})</span>
         </div>
         <div className="flex items-baseline gap-2">
-          <span className="text-xl font-bold text-primary">${product.price}</span>
+          <span className="text-lg font-bold text-primary sm:text-xl">${product.price}</span>
           {product.originalPrice && (
             <span className="text-sm text-muted-foreground line-through">
               ${product.originalPrice}
@@ -345,7 +349,7 @@ function PropertyCard({ listing }: { listing: any }) {
   return (
     <Link
       to={`/property/${listing.id}`}
-      className="group bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 block"
+      className="group block rounded-2xl bg-card overflow-hidden shadow-sm transition-all duration-300 hover:shadow-xl"
     >
       <div className="relative aspect-video overflow-hidden bg-muted">
         <img
@@ -358,10 +362,10 @@ function PropertyCard({ listing }: { listing: any }) {
         </div>
       </div>
       <div className="p-4">
-        <h3 className="font-semibold text-lg mb-2">{listing.name}</h3>
-        <div className="flex items-center gap-2 text-muted-foreground text-sm mb-3">
+        <h3 className="mb-2 break-words font-semibold text-lg">{listing.name}</h3>
+        <div className="mb-3 flex items-center gap-2 text-sm text-muted-foreground">
           <MapPin className="h-4 w-4" />
-          <span>{listing.location}</span>
+          <span className="min-w-0 break-words">{listing.location}</span>
         </div>
         <div className="flex flex-wrap gap-2 mb-3">
           {listing.features.map((feature: string) => (
@@ -374,7 +378,7 @@ function PropertyCard({ listing }: { listing: any }) {
           ))}
         </div>
         <div className="flex items-baseline gap-1 mb-3">
-          <span className="text-2xl font-bold text-primary">${listing.price.toLocaleString()}</span>
+          <span className="text-xl font-bold text-primary sm:text-2xl">${listing.price.toLocaleString()}</span>
           {listing.priceUnit && (
             <span className="text-sm text-muted-foreground">{listing.priceUnit}</span>
           )}

@@ -120,9 +120,9 @@ export function NotificationsPage() {
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 lg:pb-8">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 pb-28 sm:pb-24 lg:pb-8">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h1 className="text-3xl font-bold mb-2">Notifications</h1>
           <p className="text-muted-foreground">
@@ -130,11 +130,11 @@ export function NotificationsPage() {
           </p>
         </div>
         {notifications.length > 0 && (
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2 sm:justify-end">
             {unreadCount > 0 && (
               <button
                 onClick={markAllAsRead}
-                className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-xl hover:bg-muted transition-all text-sm font-semibold"
+                className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-border bg-card px-4 py-2 text-sm font-semibold transition-all hover:bg-muted sm:flex-none"
               >
                 <Check className="h-4 w-4" />
                 Mark all read
@@ -142,7 +142,7 @@ export function NotificationsPage() {
             )}
             <button
               onClick={clearAll}
-              className="px-4 py-2 bg-destructive/10 text-destructive border border-destructive/20 rounded-xl hover:bg-destructive/20 transition-all text-sm font-semibold"
+              className="flex-1 rounded-xl border border-destructive/20 bg-destructive/10 px-4 py-2 text-sm font-semibold text-destructive transition-all hover:bg-destructive/20 sm:flex-none"
             >
               Clear all
             </button>
@@ -201,7 +201,7 @@ export function NotificationsPage() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.2 }}
-                className={`bg-card border rounded-2xl overflow-hidden transition-all ${
+                className={`overflow-hidden rounded-2xl border bg-card transition-all ${
                   notification.read ? "border-border" : "border-primary/50 shadow-lg"
                 }`}
               >
@@ -212,14 +212,14 @@ export function NotificationsPage() {
                   </div>
 
                   {/* Content */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-2 mb-1">
-                      <h3 className="font-semibold">{notification.title}</h3>
-                      <span className="text-xs text-muted-foreground whitespace-nowrap">
+                  <div className="min-w-0 flex-1">
+                    <div className="mb-1 flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
+                      <h3 className="break-words font-semibold">{notification.title}</h3>
+                      <span className="text-xs text-muted-foreground sm:whitespace-nowrap">
                         {notification.time}
                       </span>
                     </div>
-                    <p className="text-sm text-muted-foreground">{notification.message}</p>
+                    <p className="break-words text-sm text-muted-foreground">{notification.message}</p>
                     {!notification.read && (
                       <button
                         onClick={() => markAsRead(notification.id)}
@@ -238,7 +238,7 @@ export function NotificationsPage() {
                   {/* Delete Button */}
                   <button
                     onClick={() => removeNotification(notification.id)}
-                    className="flex-shrink-0 p-2 hover:bg-destructive/10 rounded-lg transition-colors"
+                    className="flex-shrink-0 rounded-lg p-2 transition-colors hover:bg-destructive/10"
                   >
                     <X className="h-5 w-5 text-muted-foreground hover:text-destructive" />
                   </button>

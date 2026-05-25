@@ -96,7 +96,7 @@ export function PropertyListingPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 lg:pb-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 pb-28 sm:pb-24 lg:pb-8">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Properties & Vehicles</h1>
@@ -106,7 +106,7 @@ export function PropertyListingPage() {
       </div>
 
       {/* Type Filter */}
-      <div className="flex gap-3 mb-6 overflow-x-auto pb-2">
+      <div className="-mx-4 mb-6 flex gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
         {[
           { id: "all", label: "All", icon: "🏘️" },
           { id: "car", label: "Cars", icon: "🚗" },
@@ -117,20 +117,20 @@ export function PropertyListingPage() {
           <button
             key={type.id}
             onClick={() => setSelectedType(type.id as any)}
-            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold whitespace-nowrap transition-all ${
+            className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold whitespace-nowrap transition-all sm:px-6 sm:py-3 sm:text-base ${
               selectedType === type.id
                 ? "bg-primary text-primary-foreground shadow-lg"
                 : "bg-card border border-border hover:bg-muted"
             }`}
           >
-            <span className="text-xl">{type.icon}</span>
+            <span className="text-lg sm:text-xl">{type.icon}</span>
             {type.label}
           </button>
         ))}
       </div>
 
       {/* Price Range Filter */}
-      <div className="bg-card border border-border rounded-2xl p-6 mb-8">
+      <div className="mb-8 rounded-2xl border border-border bg-card p-4 sm:p-6">
         <div className="flex items-center gap-4 mb-4">
           <Filter className="h-5 w-5 text-primary" />
           <h3 className="font-semibold">Price Range</h3>
@@ -158,12 +158,12 @@ export function PropertyListingPage() {
       </div>
 
       {/* Properties Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {filteredProperties.map((property) => (
           <Link
             key={property.id}
             to={`/property/${property.id}`}
-            className="bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 block"
+            className="block overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:shadow-xl"
           >
             {/* Image */}
             <div className="relative aspect-video overflow-hidden bg-muted">
@@ -172,7 +172,7 @@ export function PropertyListingPage() {
                 alt={property.name}
                 className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
               />
-              <div className={`absolute top-4 left-4 ${typeColors[property.type]} text-white px-3 py-1 rounded-lg font-bold text-sm shadow-lg capitalize`}>
+              <div className={`absolute left-4 top-4 rounded-lg px-3 py-1 text-sm font-bold capitalize text-white shadow-lg ${typeColors[property.type]}`}>
                 {property.type}
               </div>
               <button
@@ -184,33 +184,33 @@ export function PropertyListingPage() {
             </div>
 
             {/* Content */}
-            <div className="p-6">
-              <h3 className="font-bold text-xl mb-2 line-clamp-1">{property.name}</h3>
+            <div className="p-4 sm:p-6">
+              <h3 className="mb-2 line-clamp-1 break-words text-lg font-bold sm:text-xl">{property.name}</h3>
 
               {/* Location */}
-              <div className="flex items-center gap-2 text-muted-foreground text-sm mb-4">
+              <div className="mb-4 flex items-center gap-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4" />
-                <span>{property.location}</span>
+                <span className="min-w-0 break-words">{property.location}</span>
               </div>
 
               {/* Features */}
-              <div className="flex flex-wrap gap-2 mb-4">
+              <div className="mb-4 flex flex-wrap gap-2">
                 {property.type === "apartment" || property.type === "hostel" ? (
                   <>
                     {property.bedrooms && (
-                      <div className="flex items-center gap-1 px-3 py-1 bg-muted rounded-lg text-sm">
+                      <div className="flex items-center gap-1 rounded-lg bg-muted px-3 py-1 text-sm">
                         <Bed className="h-4 w-4" />
                         {property.bedrooms} Bed
                       </div>
                     )}
                     {property.bathrooms && (
-                      <div className="flex items-center gap-1 px-3 py-1 bg-muted rounded-lg text-sm">
+                      <div className="flex items-center gap-1 rounded-lg bg-muted px-3 py-1 text-sm">
                         <Bath className="h-4 w-4" />
                         {property.bathrooms} Bath
                       </div>
                     )}
                     {property.size && (
-                      <div className="flex items-center gap-1 px-3 py-1 bg-muted rounded-lg text-sm">
+                      <div className="flex items-center gap-1 rounded-lg bg-muted px-3 py-1 text-sm">
                         <Square className="h-4 w-4" />
                         {property.size}
                       </div>
@@ -219,20 +219,20 @@ export function PropertyListingPage() {
                 ) : property.type === "car" ? (
                   <>
                     {property.year && (
-                      <div className="flex items-center gap-1 px-3 py-1 bg-muted rounded-lg text-sm">
+                      <div className="flex items-center gap-1 rounded-lg bg-muted px-3 py-1 text-sm">
                         <Calendar className="h-4 w-4" />
                         {property.year}
                       </div>
                     )}
                     {property.mileage && (
-                      <div className="px-3 py-1 bg-muted rounded-lg text-sm">
+                      <div className="rounded-lg bg-muted px-3 py-1 text-sm">
                         {property.mileage}
                       </div>
                     )}
                   </>
                 ) : (
                   property.size && (
-                    <div className="flex items-center gap-1 px-3 py-1 bg-muted rounded-lg text-sm">
+                    <div className="flex items-center gap-1 rounded-lg bg-muted px-3 py-1 text-sm">
                       <Square className="h-4 w-4" />
                       {property.size}
                     </div>
@@ -241,17 +241,17 @@ export function PropertyListingPage() {
               </div>
 
               {/* Additional Features */}
-              <div className="flex flex-wrap gap-2 mb-4">
+              <div className="mb-4 flex flex-wrap gap-2">
                 {property.features.slice(0, 3).map((feature) => (
                   <span
                     key={feature}
-                    className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-lg"
+                    className="rounded-lg bg-primary/10 px-2 py-1 text-xs text-primary"
                   >
                     {feature}
                   </span>
                 ))}
                 {property.features.length > 3 && (
-                  <span className="px-2 py-1 bg-muted text-muted-foreground text-xs rounded-lg">
+                  <span className="rounded-lg bg-muted px-2 py-1 text-xs text-muted-foreground">
                     +{property.features.length - 3} more
                   </span>
                 )}
@@ -259,7 +259,7 @@ export function PropertyListingPage() {
 
               {/* Price */}
               <div className="flex items-baseline gap-1 mb-4">
-                <span className="text-2xl font-bold text-primary">
+                <span className="text-xl font-bold text-primary sm:text-2xl">
                   ${property.price.toLocaleString()}
                 </span>
                 {property.priceUnit && (
@@ -268,13 +268,13 @@ export function PropertyListingPage() {
               </div>
 
               {/* Actions */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
                 <button
                   onClick={(e) => {
                     e.preventDefault();
                     console.log("Call seller");
                   }}
-                  className="flex items-center justify-center gap-2 py-2 px-4 border border-primary text-primary rounded-xl font-semibold hover:bg-primary/5 transition-all"
+                  className="flex items-center justify-center gap-2 rounded-xl border border-primary px-4 py-2 font-semibold text-primary transition-all hover:bg-primary/5"
                 >
                   <Phone className="h-4 w-4" />
                   Call
@@ -284,7 +284,7 @@ export function PropertyListingPage() {
                     e.preventDefault();
                     console.log("Chat with seller");
                   }}
-                  className="flex items-center justify-center gap-2 py-2 px-4 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all"
+                  className="flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 font-semibold text-primary-foreground transition-all hover:bg-primary/90"
                 >
                   <MessageCircle className="h-4 w-4" />
                   Chat
@@ -298,7 +298,7 @@ export function PropertyListingPage() {
                     e.preventDefault();
                     console.log("Schedule inspection");
                   }}
-                  className="w-full mt-3 py-2 text-sm text-primary hover:text-primary/80 font-semibold"
+                  className="mt-3 w-full py-2 text-sm font-semibold text-primary hover:text-primary/80"
                 >
                   Schedule Inspection
                 </button>

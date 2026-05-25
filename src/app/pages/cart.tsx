@@ -87,8 +87,8 @@ export function CartPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 lg:pb-8">
-      <div className="flex items-center justify-between mb-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 pb-28 sm:pb-24 lg:pb-8">
+      <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-3xl font-bold">Shopping Cart</h1>
         <span className="text-muted-foreground">{cartItems.length} items</span>
       </div>
@@ -182,13 +182,13 @@ export function CartPage() {
 
         {/* Order Summary */}
         <div className="lg:col-span-1">
-          <div className="sticky top-24 bg-card border border-border rounded-2xl p-6 space-y-6">
+          <div className="sticky top-24 space-y-6 rounded-2xl border border-border bg-card p-6">
             <h2 className="text-xl font-bold">Order Summary</h2>
 
             {/* Delivery Options */}
             <div className="space-y-3">
               <h3 className="font-semibold text-sm">Delivery Option</h3>
-              <label className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all ${
+              <label className={`flex flex-col gap-3 rounded-xl border-2 p-3 cursor-pointer transition-all sm:flex-row sm:items-center ${
                 deliveryOption === "standard" ? "border-primary bg-primary/5" : "border-border"
               }`}>
                 <input
@@ -203,7 +203,7 @@ export function CartPage() {
                   <div className="text-xs text-muted-foreground">3-5 business days • Free</div>
                 </div>
               </label>
-              <label className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all ${
+              <label className={`flex flex-col gap-3 rounded-xl border-2 p-3 cursor-pointer transition-all sm:flex-row sm:items-center ${
                 deliveryOption === "express" ? "border-primary bg-primary/5" : "border-border"
               }`}>
                 <input
@@ -223,17 +223,17 @@ export function CartPage() {
             {/* Promo Code */}
             <div className="space-y-3">
               <h3 className="font-semibold text-sm">Promo Code</h3>
-              <div className="flex gap-2">
+              <div className="flex flex-col gap-2 sm:flex-row">
                 <input
                   type="text"
                   placeholder="Enter code"
                   value={promoCode}
                   onChange={(e) => setPromoCode(e.target.value)}
-                  className="flex-1 px-4 py-2 rounded-xl bg-input border border-border focus:outline-none focus:ring-2 focus:ring-ring"
+                  className="w-full rounded-xl border border-border bg-input px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ring"
                 />
                 <button
                   onClick={applyPromo}
-                  className="px-4 py-2 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all"
+                  className="rounded-xl bg-primary px-4 py-2 font-semibold text-primary-foreground transition-all hover:bg-primary/90"
                 >
                   Apply
                 </button>

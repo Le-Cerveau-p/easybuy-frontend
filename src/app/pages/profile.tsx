@@ -105,15 +105,15 @@ export function ProfilePage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 lg:pb-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 pb-28 sm:pb-24 lg:pb-8">
       {/* Header */}
-      <div className="bg-gradient-to-br from-primary/10 via-accent/10 to-background rounded-2xl p-8 mb-8">
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+      <div className="mb-8 rounded-2xl bg-gradient-to-br from-primary/10 via-accent/10 to-background p-5 sm:p-8">
+        <div className="flex flex-col gap-6 md:flex-row md:items-center">
           <div className="h-24 w-24 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground text-3xl font-bold shadow-xl">
             {user.name.split(" ").map((n) => n[0]).join("")}
           </div>
           <div className="flex-1">
-            <h1 className="text-3xl font-bold mb-2">{user.name}</h1>
+            <h1 className="text-3xl font-bold mb-2 break-words">{user.name}</h1>
             <p className="text-muted-foreground mb-1">{user.email}</p>
             <p className="text-sm text-muted-foreground">Member since {user.memberSince}</p>
           </div>
@@ -127,7 +127,7 @@ export function ProfilePage() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 mt-8">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
           {stats.map((stat) => {
             const Icon = stat.icon;
             return (
@@ -138,7 +138,7 @@ export function ProfilePage() {
                   </div>
                   <span className="text-2xl font-bold">{stat.value}</span>
                 </div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+                <div className="break-words text-sm text-muted-foreground">{stat.label}</div>
               </div>
             );
           })}
@@ -147,7 +147,7 @@ export function ProfilePage() {
 
       {/* Tabs */}
       <div className="border-b border-border mb-8">
-        <div className="flex gap-8 overflow-x-auto">
+        <div className="flex gap-4 overflow-x-auto sm:gap-8">
           {[
             { id: "overview", label: "Overview" },
             { id: "orders", label: "Orders" },
@@ -157,7 +157,7 @@ export function ProfilePage() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`pb-4 border-b-2 font-semibold whitespace-nowrap transition-colors ${
+              className={`whitespace-nowrap border-b-2 pb-4 font-semibold transition-colors ${
                 activeTab === tab.id
                   ? "border-primary text-primary"
                   : "border-transparent text-muted-foreground hover:text-foreground"
@@ -171,10 +171,10 @@ export function ProfilePage() {
 
       {/* Overview Tab */}
       {activeTab === "overview" && (
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid gap-6 md:grid-cols-2">
           {/* Recent Orders */}
           <div className="bg-card border border-border rounded-2xl p-6">
-            <div className="flex items-center justify-between mb-6">
+            <div className="mb-6 flex items-center justify-between gap-3">
               <h2 className="text-xl font-bold">Recent Orders</h2>
               <button
                 onClick={() => setActiveTab("orders")}
@@ -188,14 +188,14 @@ export function ProfilePage() {
                 <Link
                   key={order.id}
                   to={`/order-tracking/${order.id}`}
-                  className="flex items-center gap-4 p-4 rounded-xl hover:bg-muted transition-all"
+                  className="flex flex-col gap-4 rounded-xl p-4 transition-all hover:bg-muted sm:flex-row sm:items-center"
                 >
-                  <div className="h-16 w-16 rounded-lg overflow-hidden bg-muted flex-shrink-0">
+                  <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg bg-muted">
                     <img src={order.image} alt="Order" className="w-full h-full object-cover" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="font-semibold">Order #{order.id}</span>
+                    <div className="mb-1 flex items-start justify-between gap-2">
+                      <span className="min-w-0 break-words font-semibold">Order #{order.id}</span>
                       <ChevronRight className="h-5 w-5 text-muted-foreground" />
                     </div>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
@@ -203,7 +203,7 @@ export function ProfilePage() {
                       <span>•</span>
                       <span>{order.items} items</span>
                     </div>
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between gap-3">
                       <span className={`px-2 py-1 rounded text-xs font-semibold ${getStatusColor(order.status)}`}>
                         {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
                       </span>
@@ -222,7 +222,7 @@ export function ProfilePage() {
               <div className="space-y-3">
                 <Link
                   to="/profile/addresses"
-                  className="flex items-center gap-4 p-4 rounded-xl hover:bg-muted transition-all"
+                  className="flex items-center gap-4 rounded-xl p-4 transition-all hover:bg-muted"
                 >
                   <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
                     <MapPin className="h-6 w-6 text-primary" />
@@ -235,7 +235,7 @@ export function ProfilePage() {
                 </Link>
                 <Link
                   to="/profile/payments"
-                  className="flex items-center gap-4 p-4 rounded-xl hover:bg-muted transition-all"
+                  className="flex items-center gap-4 rounded-xl p-4 transition-all hover:bg-muted"
                 >
                   <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
                     <CreditCard className="h-6 w-6 text-primary" />
@@ -248,7 +248,7 @@ export function ProfilePage() {
                 </Link>
                 <Link
                   to="/profile/security"
-                  className="flex items-center gap-4 p-4 rounded-xl hover:bg-muted transition-all"
+                  className="flex items-center gap-4 rounded-xl p-4 transition-all hover:bg-muted"
                 >
                   <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
                     <Shield className="h-6 w-6 text-primary" />
@@ -272,14 +272,14 @@ export function ProfilePage() {
             <Link
               key={order.id}
               to={`/order-tracking/${order.id}`}
-              className="block bg-card border border-border rounded-2xl p-6 hover:shadow-lg transition-all"
+              className="block rounded-2xl border border-border bg-card p-4 transition-all hover:shadow-lg sm:p-6"
             >
-              <div className="flex items-center gap-4">
-                <div className="h-24 w-24 rounded-xl overflow-hidden bg-muted flex-shrink-0">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+                <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-xl bg-muted">
                   <img src={order.image} alt="Order" className="w-full h-full object-cover" />
                 </div>
                 <div className="flex-1">
-                  <div className="flex items-start justify-between mb-2">
+                  <div className="mb-2 flex items-start justify-between gap-3">
                     <div>
                       <h3 className="font-bold text-lg">Order #{order.id}</h3>
                       <p className="text-sm text-muted-foreground">{order.date}</p>
@@ -288,9 +288,9 @@ export function ProfilePage() {
                       {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-3">
                     <span className="text-sm text-muted-foreground">{order.items} items</span>
-                    <span className="text-2xl font-bold text-primary">${order.total}</span>
+                    <span className="text-xl font-bold text-primary sm:text-2xl">${order.total}</span>
                   </div>
                 </div>
               </div>
@@ -303,7 +303,7 @@ export function ProfilePage() {
       {activeTab === "saved" && (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {savedItems.map((item) => (
-            <div key={item.id} className="bg-card border border-border rounded-2xl overflow-hidden hover:shadow-lg transition-all">
+            <div key={item.id} className="overflow-hidden rounded-2xl border border-border bg-card transition-all hover:shadow-lg">
               <div className="relative aspect-square bg-muted">
                 <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                 {!item.inStock && (
@@ -318,12 +318,12 @@ export function ProfilePage() {
                 </button>
               </div>
               <div className="p-4">
-                <h3 className="font-semibold mb-2">{item.name}</h3>
-                <div className="flex items-center justify-between">
-                  <span className="text-xl font-bold text-primary">${item.price}</span>
+                <h3 className="mb-2 break-words font-semibold">{item.name}</h3>
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-lg font-bold text-primary sm:text-xl">${item.price}</span>
                   <Link
                     to={`/product/${item.id}`}
-                    className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-all"
+                    className="rounded-lg bg-primary px-4 py-2 font-semibold text-primary-foreground transition-all hover:bg-primary/90"
                   >
                     View
                   </Link>
@@ -342,30 +342,30 @@ export function ProfilePage() {
             <h2 className="text-xl font-bold mb-4">Personal Information</h2>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-semibold mb-2">Full Name</label>
+                <label className="mb-2 block text-sm font-semibold">Full Name</label>
                 <input
                   type="text"
                   defaultValue={user.name}
-                  className="w-full px-4 py-3 rounded-xl bg-input border border-border focus:outline-none focus:ring-2 focus:ring-ring"
+                  className="w-full rounded-xl border border-border bg-input px-4 py-3 focus:outline-none focus:ring-2 focus:ring-ring"
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold mb-2">Email</label>
+                <label className="mb-2 block text-sm font-semibold">Email</label>
                 <input
                   type="email"
                   defaultValue={user.email}
-                  className="w-full px-4 py-3 rounded-xl bg-input border border-border focus:outline-none focus:ring-2 focus:ring-ring"
+                  className="w-full rounded-xl border border-border bg-input px-4 py-3 focus:outline-none focus:ring-2 focus:ring-ring"
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold mb-2">Phone</label>
+                <label className="mb-2 block text-sm font-semibold">Phone</label>
                 <input
                   type="tel"
                   defaultValue={user.phone}
-                  className="w-full px-4 py-3 rounded-xl bg-input border border-border focus:outline-none focus:ring-2 focus:ring-ring"
+                  className="w-full rounded-xl border border-border bg-input px-4 py-3 focus:outline-none focus:ring-2 focus:ring-ring"
                 />
               </div>
-              <button className="px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all">
+              <button className="w-full rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground transition-all hover:bg-primary/90 sm:w-auto">
                 Save Changes
               </button>
             </div>

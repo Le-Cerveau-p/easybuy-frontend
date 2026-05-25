@@ -89,7 +89,7 @@ export function CategoriesPage() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 lg:pb-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 pb-28 sm:pb-24 lg:pb-8">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">All Categories</h1>
@@ -97,20 +97,20 @@ export function CategoriesPage() {
       </div>
 
       {/* Categories Grid */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
         {categories.map((category) => (
           <Link
             key={category.name}
             to={`/category/${category.name.toLowerCase()}`}
-            className="group bg-card border border-border rounded-2xl p-6 hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]"
+            className="group rounded-2xl border border-border bg-card p-4 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] sm:p-6"
           >
             {/* Icon */}
-            <div className={`h-20 w-20 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center text-4xl mb-4 shadow-lg group-hover:scale-110 transition-transform`}>
+            <div className={`mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br text-2xl shadow-lg transition-transform group-hover:scale-110 sm:h-20 sm:w-20 sm:text-4xl ${category.color}`}>
               {category.icon}
             </div>
 
             {/* Category Info */}
-            <h3 className="font-bold text-xl mb-2 group-hover:text-primary transition-colors">
+            <h3 className="mb-2 break-words font-bold text-lg transition-colors group-hover:text-primary sm:text-xl">
               {category.name}
             </h3>
             <p className="text-sm text-muted-foreground mb-4">{category.count} products</p>
@@ -120,8 +120,8 @@ export function CategoriesPage() {
               {category.subcategories.slice(0, 3).map((sub) => (
                 <div
                   key={sub}
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
-                >
+                className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
+              >
                   <span className="h-1 w-1 bg-primary rounded-full" />
                   {sub}
                 </div>
@@ -139,11 +139,11 @@ export function CategoriesPage() {
       {/* Featured Categories */}
       <div className="mt-12">
         <h2 className="text-2xl font-bold mb-6">Featured Collections</h2>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid gap-6 md:grid-cols-2">
           {/* Electronics Banner */}
           <Link
             to="/category/electronics"
-            className="relative h-64 rounded-2xl overflow-hidden group"
+            className="group relative h-56 overflow-hidden rounded-2xl sm:h-64"
           >
             <img
               src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=800"
@@ -151,10 +151,10 @@ export function CategoriesPage() {
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <h3 className="text-2xl font-bold mb-2">Latest Electronics</h3>
-              <p className="text-white/90 mb-4">Discover cutting-edge tech at amazing prices</p>
-              <span className="inline-block px-4 py-2 bg-primary text-primary-foreground rounded-lg font-semibold">
+            <div className="absolute bottom-0 left-0 right-0 p-4 text-white sm:p-6">
+              <h3 className="mb-2 text-xl font-bold sm:text-2xl">Latest Electronics</h3>
+              <p className="mb-4 text-white/90">Discover cutting-edge tech at amazing prices</p>
+              <span className="inline-block rounded-lg bg-primary px-4 py-2 font-semibold text-primary-foreground">
                 Shop Now
               </span>
             </div>
@@ -163,7 +163,7 @@ export function CategoriesPage() {
           {/* Furniture Banner */}
           <Link
             to="/category/furniture"
-            className="relative h-64 rounded-2xl overflow-hidden group"
+            className="group relative h-56 overflow-hidden rounded-2xl sm:h-64"
           >
             <img
               src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800"
@@ -171,10 +171,10 @@ export function CategoriesPage() {
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <h3 className="text-2xl font-bold mb-2">Premium Furniture</h3>
-              <p className="text-white/90 mb-4">Transform your space with elegant designs</p>
-              <span className="inline-block px-4 py-2 bg-primary text-primary-foreground rounded-lg font-semibold">
+            <div className="absolute bottom-0 left-0 right-0 p-4 text-white sm:p-6">
+              <h3 className="mb-2 text-xl font-bold sm:text-2xl">Premium Furniture</h3>
+              <p className="mb-4 text-white/90">Transform your space with elegant designs</p>
+              <span className="inline-block rounded-lg bg-primary px-4 py-2 font-semibold text-primary-foreground">
                 Explore
               </span>
             </div>
