@@ -1,17 +1,26 @@
 import { lazy, Suspense, useEffect } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Navigate, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider } from "./components/theme-provider";
 import { TopNavigation } from "./components/top-navigation";
 import { BottomNavigation } from "./components/bottom-navigation";
 import { Footer } from "./components/footer";
 import { AdminSidebar } from "./components/admin-sidebar";
+import { isAdminSession } from "./lib/auth";
 
 const HomePage = lazy(() =>
   import("./pages/home").then((module) => ({ default: module.HomePage })),
 );
+const LandingPage = lazy(() =>
+  import("./pages/landing").then((module) => ({ default: module.LandingPage })),
+);
 const LoginEnhancedPage = lazy(() =>
   import("./pages/login-enhanced").then((module) => ({
     default: module.LoginEnhancedPage,
+  })),
+);
+const AdminLoginPage = lazy(() =>
+  import("./pages/admin-login").then((module) => ({
+    default: module.AdminLoginPage,
   })),
 );
 const RegisterPage = lazy(() =>
@@ -166,11 +175,16 @@ function RouteLoader() {
   );
 }
 
+function StoreRoute() {
+  return isAdminSession() ? <Navigate to="/admin/dashboard" replace /> : <HomePage />;
+}
+
 function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const authPages = ["/login", "/register", "/forgot-password"];
   const adminPages = location.pathname.startsWith("/admin");
   const isAuthPage = authPages.includes(location.pathname);
+  const isLandingPage = location.pathname === "/";
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -184,10 +198,10 @@ function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {!isAuthPage && !adminPages && <TopNavigation />}
+      {!isAuthPage && !adminPages && !isLandingPage && <TopNavigation />}
       <main data-app-scroll className="flex-1 min-w-0 overflow-x-hidden">{children}</main>
-      {!isAuthPage && !adminPages && <Footer />}
-      {!isAuthPage && !adminPages && <BottomNavigation />}
+      {!isAuthPage && !adminPages && !isLandingPage && <Footer />}
+      {!isAuthPage && !adminPages && !isLandingPage && <BottomNavigation />}
     </div>
   );
 }
@@ -209,8 +223,10 @@ export default function App() {
           <Suspense fallback={<RouteLoader />}>
             <Routes>
               {/* Public Pages */}
-              <Route path="/" element={<HomePage />} />
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/store" element={<StoreRoute />} />
               <Route path="/login" element={<LoginEnhancedPage />} />
+              <Route path="/admin/login" element={<AdminLoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 

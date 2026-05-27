@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff, ShoppingBag, TrendingUp, Package } from "lucide-react";
 import { motion } from "motion/react";
+import { setAuthRole } from "../lib/auth";
 
 export function LoginEnhancedPage() {
   const navigate = useNavigate();
@@ -33,10 +34,12 @@ export function LoginEnhancedPage() {
     // Simulate API call
     setTimeout(() => {
       // Admin redirect logic
-      if (formData.email.toLowerCase() === "admin@easybuy.com") {
+      if (formData.email.toLowerCase() === "admin@eazybuy.com") {
+        setAuthRole("admin");
         navigate("/admin/dashboard");
       } else {
         // Normal user redirect
+        setAuthRole("user");
         navigate("/");
       }
       setIsLoading(false);
@@ -62,15 +65,15 @@ export function LoginEnhancedPage() {
         <div className="relative z-10 flex flex-col justify-center items-center p-12 text-white w-full">
           {/* Logo */}
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="mb-12"
-          >
-            <div className="h-24 w-24 rounded-2xl bg-white/10 backdrop-blur-sm flex items-center justify-center shadow-2xl border border-white/20 mb-6">
-              <span className="text-white font-bold text-5xl">E</span>
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="mb-12"
+        >
+            <div className="h-24 w-24 rounded-2xl bg-white p-2 flex items-center justify-center shadow-2xl border border-white/20 mb-6 overflow-hidden">
+              <img src="/eazylogo.jpg" alt="Eazybuy" className="h-full w-full object-contain" />
             </div>
-            <h1 className="text-5xl font-bold text-center mb-4">EasyBuy</h1>
+            <h1 className="text-5xl font-bold text-center mb-4">Eazybuy</h1>
             <p className="text-xl text-white/90 text-center">Your Premium Marketplace</p>
           </motion.div>
 
@@ -112,11 +115,11 @@ export function LoginEnhancedPage() {
         <div className="w-full max-w-md">
           {/* Mobile Logo */}
           <div className="lg:hidden text-center mb-8">
-            <div className="inline-flex h-20 w-20 rounded-2xl bg-gradient-to-br from-primary to-accent items-center justify-center shadow-xl mb-4">
-              <span className="text-primary-foreground font-bold text-3xl">E</span>
+            <div className="inline-flex h-20 w-20 overflow-hidden rounded-2xl bg-white p-2 items-center justify-center shadow-xl mb-4">
+              <img src="/eazylogo.jpg" alt="Eazybuy" className="h-full w-full object-contain" />
             </div>
             <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              EasyBuy
+              Eazybuy
             </h1>
             <p className="text-muted-foreground">Your Premium Marketplace</p>
           </div>
@@ -247,7 +250,7 @@ export function LoginEnhancedPage() {
             {/* Admin Notice */}
             <div className="mt-6 p-3 bg-muted/50 rounded-xl text-center">
               <p className="text-xs text-muted-foreground">
-                Admin? Use <span className="font-semibold text-foreground">admin@easybuy.com</span>
+                Admin? Use <span className="font-semibold text-foreground">admin@eazybuy.com</span>
               </p>
             </div>
           </motion.div>

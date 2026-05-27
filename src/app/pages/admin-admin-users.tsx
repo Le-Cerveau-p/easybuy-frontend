@@ -18,7 +18,7 @@ export function AdminAdminUsersPage() {
     {
       id: 1,
       name: "John Admin",
-      email: "admin@easybuy.com",
+      email: "admin@eazybuy.com",
       role: "super-admin",
       status: "active",
       lastActive: "5 min ago",
@@ -27,7 +27,7 @@ export function AdminAdminUsersPage() {
     {
       id: 2,
       name: "Sarah Manager",
-      email: "sarah.m@easybuy.com",
+      email: "sarah.m@eazybuy.com",
       role: "inventory-manager",
       status: "active",
       lastActive: "2 hours ago",
@@ -36,7 +36,7 @@ export function AdminAdminUsersPage() {
     {
       id: 3,
       name: "Mike Sales",
-      email: "mike.s@easybuy.com",
+      email: "mike.s@eazybuy.com",
       role: "sales-manager",
       status: "active",
       lastActive: "1 day ago",

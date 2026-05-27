@@ -50,7 +50,7 @@ export function AdminSettingsPage() {
                 <label className="block text-sm font-semibold mb-2">Store Name</label>
                 <input
                   type="text"
-                  defaultValue="EasyBuy"
+                  defaultValue="Eazybuy"
                   className="w-full px-4 py-2.5 rounded-xl bg-input border border-border focus:outline-none focus:ring-2 focus:ring-ring"
                 />
               </div>
@@ -58,7 +58,7 @@ export function AdminSettingsPage() {
                 <label className="block text-sm font-semibold mb-2">Store Email</label>
                 <input
                   type="email"
-                  defaultValue="admin@easybuy.com"
+                  defaultValue="admin@eazybuy.com"
                   className="w-full px-4 py-2.5 rounded-xl bg-input border border-border focus:outline-none focus:ring-2 focus:ring-ring"
                 />
               </div>

@@ -49,8 +49,8 @@ export function ForgotPasswordPage() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex h-16 w-16 rounded-2xl bg-gradient-to-br from-primary to-accent items-center justify-center shadow-lg mb-4">
-            <span className="text-primary-foreground font-bold text-2xl">M</span>
+          <div className="inline-flex h-16 w-16 overflow-hidden rounded-2xl bg-white p-2 items-center justify-center shadow-lg mb-4">
+            <img src="/eazylogo.jpg" alt="Eazybuy" className="h-full w-full object-contain" />
           </div>
           <h1 className="text-3xl font-bold mb-2">
             {step === "email" && "Forgot Password"}

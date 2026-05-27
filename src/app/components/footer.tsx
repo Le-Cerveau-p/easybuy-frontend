@@ -9,11 +9,11 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg">
-                <span className="text-primary-foreground font-bold text-lg">E</span>
+              <div className="h-10 w-10 overflow-hidden rounded-xl bg-white p-1 flex items-center justify-center shadow-lg">
+                <img src="/eazylogo.jpg" alt="Eazybuy" className="h-full w-full object-contain" />
               </div>
               <span className="font-bold text-xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                EasyBuy
+                Eazybuy
               </span>
             </div>
             <p className="text-sm text-muted-foreground mb-4">
@@ -96,7 +96,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            (c) 2026 EasyBuy. All rights reserved.
+            (c) 2026 Eazybuy. All rights reserved.
           </p>
           <div className="flex gap-6">
             <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">

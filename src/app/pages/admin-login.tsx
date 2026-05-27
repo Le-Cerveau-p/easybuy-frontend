@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff, Shield } from "lucide-react";
+import { setAuthRole } from "../lib/auth";
 
 export function AdminLoginPage() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ export function AdminLoginPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Admin Login:", formData);
+    setAuthRole("admin");
     navigate("/admin/dashboard");
   };
 
@@ -21,8 +23,8 @@ export function AdminLoginPage() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex h-20 w-20 rounded-2xl bg-gradient-to-br from-secondary to-primary items-center justify-center shadow-2xl mb-4 border-4 border-background">
-            <Shield className="h-10 w-10 text-primary-foreground" />
+          <div className="inline-flex h-20 w-20 overflow-hidden rounded-2xl bg-white p-2 items-center justify-center shadow-2xl mb-4 border-4 border-background">
+            <img src="/eazylogo.jpg" alt="Eazybuy" className="h-full w-full object-contain" />
           </div>
           <h1 className="text-3xl font-bold mb-2">Admin Portal</h1>
           <p className="text-muted-foreground">Secure access for administrators only</p>
@@ -41,7 +43,7 @@ export function AdminLoginPage() {
                 <input
                   id="email"
                   type="email"
-                  placeholder="admin@marketplace.com"
+                  placeholder="admin@eazybuy.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="w-full pl-12 pr-4 py-3 rounded-xl bg-input border-2 border-border focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary transition-all"

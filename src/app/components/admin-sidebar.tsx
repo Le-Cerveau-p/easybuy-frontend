@@ -19,6 +19,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { clearAuthRole } from "../lib/auth";
 
 export function AdminSidebar() {
   const location = useLocation();
@@ -47,13 +48,13 @@ export function AdminSidebar() {
       {/* Logo */}
       <div className="p-6 border-b border-border">
         <Link to="/admin/dashboard" className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg flex-shrink-0">
-            <span className="text-primary-foreground font-bold text-lg">E</span>
+          <div className="h-10 w-10 overflow-hidden rounded-xl bg-white p-1 flex items-center justify-center shadow-lg flex-shrink-0">
+            <img src="/eazylogo.jpg" alt="Eazybuy" className="h-full w-full object-contain" />
           </div>
           {!isCollapsed && (
             <div>
               <div className="font-bold text-lg bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                EasyBuy
+                Eazybuy
               </div>
               <div className="text-xs text-muted-foreground">Admin Portal</div>
             </div>
@@ -96,7 +97,10 @@ export function AdminSidebar() {
       {/* Logout */}
       <div className="p-4 border-t border-border">
         <button
-          onClick={() => window.location.href = "/login"}
+          onClick={() => {
+            clearAuthRole();
+            window.location.href = "/login";
+          }}
           className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-destructive/10 text-destructive transition-all group"
           title={isCollapsed ? "Logout" : undefined}
         >

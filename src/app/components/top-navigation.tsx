@@ -14,11 +14,11 @@ export function TopNavigation() {
           {/* Left: Logo */}
           <div className="flex items-center gap-4">
             <Link to="/" className="flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-accent shadow-lg sm:h-10 sm:w-10">
-                <span className="text-base font-bold text-primary-foreground sm:text-lg">E</span>
+              <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-white p-1 shadow-lg sm:h-10 sm:w-10">
+                <img src="/eazylogo.jpg" alt="Eazybuy" className="h-full w-full object-contain" />
               </div>
               <span className="whitespace-nowrap text-sm font-bold leading-none bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent sm:text-xl">
-                EasyBuy
+                Eazybuy
               </span>
             </Link>
           </div>
